@@ -5,8 +5,8 @@ const con = require("./config");
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/loginpage.html");
 });
-app.get("/LRs", (req, res) => {
-  con.query("select * from lrs", (err, result) => {
+app.get("/student_details", (req, res) => {
+  con.query("select * from mst_student_details", (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -14,14 +14,17 @@ app.get("/LRs", (req, res) => {
     }
   });
 });
-app.get("/accounts", (req, res) => {
-  con.query("select * from accounts", (err, result) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
+app.get("/all", (req, res) => {
+  con.query(
+    "select * from mst_student_details stu LEFT JOIN mst_std std ON std.std_id=stu.standard_id LEFT JOIN mst_section sec ON sec.section_id=stu.section_id LEFT JOIN companies ON companies.company_id=stu.student_company_id",
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
     }
-  });
+  );
 });
 app.get("/std", (req, res) => {
   con.query("select * from mst_std", (err, result) => {
