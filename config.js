@@ -6,7 +6,7 @@ const con = mysql.createConnection({
   password: "Yesha@123",
   port: "3306",
   database: "freightbk01",
-  ssl: { ca: fs.readFileSync("V:/downloads/DigiCertGlobalRootCA.crt.pem") },
+  ssl: { ca: fs.readFileSync("./DigiCertGlobalRootCA.crt.pem") },
 });
 con.connect((err) => {
   if (err) {
